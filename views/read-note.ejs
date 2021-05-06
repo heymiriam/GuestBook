@@ -11,9 +11,9 @@
     <h1><%= title %></h1>
     <h3><a href='/'>Go back</a></h3>
     <ul>
-      <% for(let i=0; i < note.length; i++) { %>
-      <li><%=note[i].note%></li>
-      <% } %>
+      <% for(let i=0; i<notes.length; i++){ %>
+        <li><%= notes[i].note %></li>
+        <% } %>
     </ul>
   </body>
 </html>

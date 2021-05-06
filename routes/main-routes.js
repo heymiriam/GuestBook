@@ -4,26 +4,31 @@ const path = require('path')
 
 const router = express.Router()
 
-const data = []
+const data = [
+    {
+        id:1, 
+        note:'test1'
+    },
+]
 router.get('/', (req,res,next) => {
-    res.render('index', { note: data, title: "Guestbook" })
+    res.render('index', { notes: data, title: "Guestbook" })
 })
 
 router.get('/leave-note', (req,res,next) => {
-    res.render('leave-note', { note: data, title: "Leave a Note" })
+    res.render('leave-note', { notes: data, title: "Leave a Note" })
 })
 
 router.get('/read-note', (req,res,next) => {
-    res.render('read-note', { note: data, title: "Read Notes" })
+    res.render('read-note', { notes: data, title: "Read Notes" })
 })
 
 router.post('/leave-note', (req,res,next) => {
     data.push({
         id: Math.random(),
-        note: req.body.product
+        note: req.body.note
     })
 
-    fs.writeFile(path.join(__dirname, '..', 'note.json'), JSON.stringify(data, null, 2), () => {
+    fs.writeFile(path.join(__dirname, '..', 'notes.json'), JSON.stringify(data, null, 2), () => {
         res.status(302).redirect('/read-note')
     })
 })
